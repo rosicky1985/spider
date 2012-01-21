@@ -37,7 +37,7 @@ public class SpiderTask {
 		int code = (int) (current % 10000);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String yyyyMMdd = sdf.format(new Date());
-		sb.append(this.destination).append(".").append(KEY).append(".")
+		sb.append(this.destination).append(KEY).append(".")
 				.append(yyyyMMdd).append(".").append(code).append(".")
 				.append(EXTENSION);
 		return sb.toString();
