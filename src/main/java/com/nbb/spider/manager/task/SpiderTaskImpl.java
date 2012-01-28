@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nbb.spider.dao.TaskLogDao;
 import com.nbb.spider.entity.Item;
@@ -42,6 +43,7 @@ public class SpiderTaskImpl implements SpiderTask {
 	 * 
 	 * @see com.nbb.spider.manager.task.SpiderTask#run()
 	 */
+	@Transactional
 	@Override
 	public void run() throws IOException {
 		QiyiExporter export = new QiyiExporter();

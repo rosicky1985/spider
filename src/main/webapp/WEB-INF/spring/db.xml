@@ -29,8 +29,13 @@
 
 	<!-- Hibernate SessionFactory -->
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedPackages">
+			<list>
+				<value>com.nbb.spider.entity</value>
+			</list>
+		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
@@ -51,8 +56,8 @@
 			</map>
 		</property>
 	</bean>
-	
-	
+
+
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${db.driver}" />
@@ -61,10 +66,10 @@
 		<property name="password" value="${db.password}" />
 	</bean>
 
-<!-- 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 		<property name="sessionFactory" ref="sessionFactory"></property> -->
-<!-- 	</bean> -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="sessionFactory" ref="sessionFactory"></property> -->
+	</bean>
 
 	<tx:annotation-driven />
 
