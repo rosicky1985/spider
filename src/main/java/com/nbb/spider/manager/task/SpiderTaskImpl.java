@@ -22,7 +22,7 @@ import com.nbb.spider.manager.webspider.impl.QiyiSpider;
 import com.nbb.spider.manager.webspider.impl.QiyiTop50Spider;
 import com.nbb.spider.manager.webspider.impl.YoukuSpider;
 
-@Component
+@Component(value = "spiderTask")
 public class SpiderTaskImpl implements SpiderTask {
 	private final static String KEY = "spided";
 	private final static String EXTENSION = "xls";

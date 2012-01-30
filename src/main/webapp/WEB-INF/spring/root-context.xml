@@ -11,5 +11,6 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<import resource="db.xml" />
+	<import resource="scheduler.xml" />
 	<context:annotation-config />
 </beans>
