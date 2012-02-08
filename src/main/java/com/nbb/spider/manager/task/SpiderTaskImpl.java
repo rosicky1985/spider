@@ -26,7 +26,7 @@ import com.nbb.spider.manager.webspider.impl.YoukuSpider;
 public class SpiderTaskImpl implements SpiderTask {
 	private final static String KEY = "spided";
 	private final static String EXTENSION = "xls";
-	private String destination = "d:\\tmp\\";
+	private String destination = "/tmp/spider/";
 	@Autowired
 	private TaskLogDao taskLogDao;
 
