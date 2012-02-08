@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nbb.spider.dao.TaskLogDao;
@@ -22,11 +22,11 @@ import com.nbb.spider.manager.webspider.impl.QiyiSpider;
 import com.nbb.spider.manager.webspider.impl.QiyiTop50Spider;
 import com.nbb.spider.manager.webspider.impl.YoukuSpider;
 
-@Component(value = "spiderTask")
+@Service(value = "spiderTask")
 public class SpiderTaskImpl implements SpiderTask {
 	private final static String KEY = "spided";
 	private final static String EXTENSION = "xls";
-	private String destination = "/tmp/";
+	private String destination = "d:\\tmp\\";
 	@Autowired
 	private TaskLogDao taskLogDao;
 
