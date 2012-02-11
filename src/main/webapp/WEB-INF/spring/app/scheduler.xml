@@ -26,7 +26,7 @@
 						</bean>
 					</property>
 					<!-- cron表达式 -->
-					<property name="cronExpression" value="* * * * * ?">
+					<property name="cronExpression" value="0 1/3 * * * ?">
 					</property>
 				</bean>
 			</list>
