@@ -16,7 +16,7 @@
 				<th>Download</th>
 			</tr>
 		</thead>
-		<c:forEach var="task" items="list">
+		<c:forEach var="task" items="${list}">
 			<tr>
 				<td><fmt:formatDate value="${task.created}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
 				<td>${task.destination}</td>
