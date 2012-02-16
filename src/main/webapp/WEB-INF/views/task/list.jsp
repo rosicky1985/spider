@@ -6,9 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel=StyleSheet href="http://${header["host"]}<c:out value="${pageContext.request.contextPath}"/>/resources/css/screen.css"></link>
 <title>TaskList</title>
 </head>
 <body>
+	<h2>Spider</h2>
 	<table>
 		<thead>
 			<tr>
@@ -23,5 +25,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<div>powered by nbb @ 2012</div>
 </body>
 </html>

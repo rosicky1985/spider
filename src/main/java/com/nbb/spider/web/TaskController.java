@@ -23,15 +23,16 @@ public class TaskController {
 	private TaskLogService taskLogService;
 
 	@RequestMapping(value = "/task/run.do")
-	public void run() throws IOException {
+	public String run() throws IOException {
 		spiderTask.run();
+		return "redirect:/task/list.do";
 	}
 
 	@RequestMapping(value = "/task/list.do")
 	public ModelAndView list() {
 		List<TaskLog> list = taskLogService.list();
-		Map<String,List<TaskLog>> model = new HashMap<String,List<TaskLog>>();
-		model.put("list",list);
-		return new ModelAndView("task/list",model);
+		Map<String, List<TaskLog>> model = new HashMap<String, List<TaskLog>>();
+		model.put("list", list);
+		return new ModelAndView("task/list", model);
 	}
 }
