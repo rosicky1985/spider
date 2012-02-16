@@ -8,6 +8,7 @@
 </head>
 <body>
 	<%@ include file="/resources/common/header.jsp"%>
+	<a href="${ctx}/task/run.do">run immediately</a>
 	<table>
 		<thead>
 			<tr>

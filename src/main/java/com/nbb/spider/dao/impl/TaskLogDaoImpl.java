@@ -22,7 +22,7 @@ public class TaskLogDaoImpl extends AbstractDao<TaskLog> implements TaskLogDao {
 	@Override
 	@Transactional
 	public List<TaskLog> getAllTasks() {
-		return this.getSession().createQuery("from TaskLog").list();
+		return this.getSession().createQuery("from TaskLog order by created desc").list();
 	}
 
 }
