@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,8 @@ import com.nbb.spider.manager.webspider.impl.YoukuSpider;
 
 @Service(value = "spiderTask")
 public class SpiderTaskImpl implements SpiderTask {
+	private static final Logger logger = LoggerFactory
+			.getLogger(SpiderTask.class);
 	private final static String KEY = "spided";
 	private final static String EXTENSION = "xls";
 	private String destination = "/tmp/spider/";
@@ -46,6 +50,8 @@ public class SpiderTaskImpl implements SpiderTask {
 	@Transactional
 	@Override
 	public void run() throws IOException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		logger.info("spider task starting... @ " + sdf.format(new Date()));
 		QiyiExporter export = new QiyiExporter();
 		Workbook wb = export.createWorkBook();
 		qiyi(wb);
@@ -57,6 +63,7 @@ public class SpiderTaskImpl implements SpiderTask {
 		log.setCreated(new Date());
 		log.setDestination(fullPath);
 		taskLogDao.save(log);
+		logger.info("spider task ended @ " + sdf.format(new Date()));
 	}
 
 	protected String getDestinationFullPathWithEncoding() {
