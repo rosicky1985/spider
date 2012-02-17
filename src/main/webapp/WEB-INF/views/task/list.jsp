@@ -20,7 +20,7 @@
 			<tr>
 				<td><fmt:formatDate value="${task.created}"
 						pattern="yyyy-MM-dd HH:mm:ss" /></td>
-				<td>${task.destination}</td>
+				<td><a href="${ctx }/resources/${task.destination}">download</td>
 			</tr>
 		</c:forEach>
 	</table>

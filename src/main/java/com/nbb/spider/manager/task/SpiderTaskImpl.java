@@ -1,6 +1,8 @@
 package com.nbb.spider.manager.task;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -26,11 +28,10 @@ import com.nbb.spider.manager.webspider.impl.YoukuSpider;
 
 @Service(value = "spiderTask")
 public class SpiderTaskImpl implements SpiderTask {
-	private static final Logger logger = LoggerFactory
-			.getLogger(SpiderTask.class);
+	private static final Logger logger = LoggerFactory.getLogger(SpiderTask.class);
 	private final static String KEY = "spided";
 	private final static String EXTENSION = "xls";
-	private String destination = "/tmp/spider/";
+	private String destination = "spidered/";
 	@Autowired
 	private TaskLogDao taskLogDao;
 
@@ -57,11 +58,13 @@ public class SpiderTaskImpl implements SpiderTask {
 		qiyi(wb);
 		baidu(wb);
 		youku(wb);
-		String fullPath = getDestinationFullPathWithEncoding();
+		String realPath = getDestinationFullPathWithEncoding();
+		String webRootPath = getWebRootPath();
+		String fullPath = webRootPath + "resources/" + realPath;
 		export.saveWorkBook(wb, fullPath);
 		TaskLog log = new TaskLog();
 		log.setCreated(new Date());
-		log.setDestination(fullPath);
+		log.setDestination(realPath);
 		taskLogDao.save(log);
 		logger.info("spider task ended @ " + sdf.format(new Date()));
 	}
@@ -72,9 +75,25 @@ public class SpiderTaskImpl implements SpiderTask {
 		int code = (int) (current % 10000);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String yyyyMMdd = sdf.format(new Date());
-		sb.append(this.destination).append(KEY).append(".").append(yyyyMMdd)
-				.append(".").append(code).append(".").append(EXTENSION);
+		
+		sb.append(this.destination).append(KEY).append(".").append(yyyyMMdd).append(".").append(code)
+				.append(".").append(EXTENSION);
 		return sb.toString();
+	}
+
+	protected String getWebRootPath() {
+		URL url = SpiderTaskImpl.class.getResource("SpiderTaskImpl.class");
+		String temppath = url.toString();
+		int startIndex = temppath.indexOf("file:");
+		int index = temppath.indexOf("WEB-INF");
+		String deployWarPath = temppath.substring(startIndex + "file:".length() + 1, index);
+		// 如果是linux的操作系统,并且开始没有file分隔符的话,那么要加上
+		if (System.getProperty("os.name").indexOf("Linux") != -1) {
+			if (!deployWarPath.startsWith(File.separator)) {
+				deployWarPath = File.separator + deployWarPath;
+			}
+		}
+		return deployWarPath;
 	}
 
 	protected void qiyi(Workbook wb) throws IOException {
