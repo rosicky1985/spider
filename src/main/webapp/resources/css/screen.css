@@ -1,43 +1,62 @@
 /* accessible green on black style sheet copyright Lois Wakeman, 2000 */
-
-BODY,  DIV, TD, P, LI {
+BODY {
+	background-image:url(http://www.wallcoo.com/cartoon/Scrapbook_Art_Paper_Sweet/images/LBA_SweetSensation_PP12.jpg);
+	font-size:120%;
 	color : #00FF80;
-	font : medium Verdana, Arial, Helvetica, sans-serif;
-	background : #000000;
+    font-family:old english text mt;
+	background : #444;
+    text-align: center;
+	margin:0;
 }
-
+DIV{
+	background:#777;
+ }
+DIV#header{
+	background:#555;
+    color : #00FF80;
+	margin: auto 0 auto 0;
+	font-family:old english text mt;
+	font-size:60px;
+	text-align:left;
+}
+DIV#navi{
+	background:#666;
+	text-align:right;
+}
+TD {
+    color:#000;
+    text-align:center;
+}
 TH {
-	color : #00FF80;
-	font : bold medium Verdana, Arial, Helvetica, sans-serif;
-	background : #000000;
+    padding-bottom: 3px;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-top: 3px;
+	font-size:150%;
+        color : #FFF;
+	font-weight : bold;
 }
-
-H1 {
-	color : #00FF80;
-	font : bold larger Verdana, Arial, Helvetica, sans-serif;
-	background : #000000;
-}
-
 H2 {
 	color : #00FF80;
-	font : bold medium Verdana, Arial, Helvetica, sans-serif;
-	background : #000000;
 }
 
 H3 {
 	color : #00FF80;
-	font : bold small Verdana, Arial, Helvetica, sans-serif;
-	background : #000000;
 }
-
 A:LINK {
-	color : #FFFFFF;
+	background-image:url(images/buttons/download.png);
+    font-weight:bold;
+	color : #700;
 }
 
 A:VISITED {
+	background-image:url(images/buttons/DownloadGrey.png);
+	font-weight:bold;
 	color : #CCCCCC;
 }
 
 A:HOVER, A:ACTIVE {
-	color : #FF00FF;
+	background-image:url(images/buttons/Download.png);
+	font-weight:bold;
+	color : #000000;
 }
