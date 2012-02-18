@@ -26,7 +26,7 @@
 			<tr>
 				<td><fmt:formatDate value="${task.created}"
 						pattern="yyyy-MM-dd HH:mm:ss" /></td>
-				<td><a href="${ctx}/resources/${task.destination}">download</td>
+				<td><a href="${ctx}/resources/${task.destination}"><img src="${ctx}/resources/images/buttons/download.png" width="30" height="30" style="margin:5px 5px 5px 0px"/></td>
 			</tr>
 		</c:forEach>
 	</table>
