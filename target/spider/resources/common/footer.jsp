@@ -1,1 +1,0 @@
-<div>powered by nbb @ 2012</div>
