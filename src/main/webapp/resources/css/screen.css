@@ -1,6 +1,5 @@
 /* accessible green on black style sheet copyright Lois Wakeman, 2000 */
 BODY {
-	background-image:url(http://www.wallcoo.com/cartoon/Scrapbook_Art_Paper_Sweet/images/LBA_SweetSensation_PP12.jpg);
 	font-size:120%;
 	color : #00FF80;
     font-family:old english text mt;
@@ -14,15 +13,78 @@ DIV{
 DIV#header{
 	background:#555;
     color : #00FF80;
-	margin: auto 0 auto 0;
+	margin: auto 0px auto 0px;
 	font-family:old english text mt;
 	font-size:60px;
 	text-align:left;
 }
 DIV#navi{
-	background:#666;
+	background-color:#666;
 	text-align:right;
+	height:30px;
+	width:800px;
+	display:inline;
 }
+
+#navi UL {
+	height:30px; 
+	width:800px;
+
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	background-color:#666;
+}
+#navi UL LI{
+    float:right;
+}
+
+
+#apple{
+	background:url(../images/blk-app.png) no-repeat;
+	display:block;
+	height:30px;
+	width:30px;
+}
+#apple:hover{
+	background:url(../images/blk-app.png) no-repeat 0 -30px;
+	display:block;
+	width:30px;
+}
+#spider{
+	background:url(../images/Spider.png) no-repeat;
+	display:block;
+	height:30px;
+	width:30px;
+}
+#spider:hover{
+	background:url(../images/buttons/spider_30.png) no-repeat;
+	display:block;
+	width:30px;
+}
+#music{
+	background:url(../images/buttonsg/music3_30.png) no-repeat;
+	display:block;
+	height:30px;
+	width:30px;
+}
+#music:hover{
+	background:url(../images/buttons/music3_30.png) no-repeat;
+	display:block;
+	width:30px;
+}
+#tools{
+	background:url(../images/buttonsg/tools3.png) no-repeat;
+	display:block;
+	height:30px;
+	width:30px;
+}
+#tools:hover{
+	background:url(../images/buttonsg/tools3.png) no-repeat 0 -29px;
+	display:block;
+	width:30px;
+}
+
 TD {
     color:#000;
     text-align:center;
@@ -44,19 +106,16 @@ H3 {
 	color : #00FF80;
 }
 A:LINK {
-	background-image:url(images/buttons/download.png);
     font-weight:bold;
 	color : #700;
 }
 
 A:VISITED {
-	background-image:url(images/buttons/DownloadGrey.png);
 	font-weight:bold;
 	color : #CCCCCC;
 }
 
 A:HOVER, A:ACTIVE {
-	background-image:url(images/buttons/Download.png);
 	font-weight:bold;
 	color : #000000;
 }
