@@ -1,11 +1,10 @@
 package com.nbb.spider.manager.task;
 
+import com.nbb.spider.entity.TaskLog;
 import java.util.List;
 
-import com.nbb.spider.entity.TaskLog;
-
-public interface TaskLogService {
-
-	public List<TaskLog> list();
-
+public abstract interface TaskLogService
+{
+  public abstract List<TaskLog> list();
 }
+

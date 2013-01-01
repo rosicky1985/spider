@@ -1,7 +1,11 @@
 package com.nbb.spider.entity;
 
-public interface Item {
-	public String getTitle();
-	public Integer getRank();
-	public abstract int compareRankto(Item arg1);
+public abstract interface Item
+{
+  public abstract String getTitle();
+
+  public abstract Integer getRank();
+
+  public abstract int compareRankto(Item paramItem);
 }
+
