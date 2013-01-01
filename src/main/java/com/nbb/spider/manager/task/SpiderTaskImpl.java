@@ -1,27 +1,30 @@
  package com.nbb.spider.manager.task;
  
- import com.nbb.spider.dao.TaskLogDao;
- import com.nbb.spider.entity.TaskLog;
- import com.nbb.spider.manager.exporter.impl.BaiduExporter;
- import com.nbb.spider.manager.exporter.impl.QiyiExporter;
- import com.nbb.spider.manager.exporter.impl.QiyiTop50Exporter;
- import com.nbb.spider.manager.exporter.impl.YoukuExporter;
- import com.nbb.spider.manager.webspider.impl.BaiduSpider;
- import com.nbb.spider.manager.webspider.impl.QiyiSpider;
- import com.nbb.spider.manager.webspider.impl.QiyiTop50Spider;
- import com.nbb.spider.manager.webspider.impl.YoukuSpider;
  import java.io.File;
- import java.io.IOException;
- import java.net.URL;
- import java.text.SimpleDateFormat;
- import java.util.Date;
- import java.util.List;
- import org.apache.poi.ss.usermodel.Workbook;
- import org.slf4j.Logger;
- import org.slf4j.LoggerFactory;
- import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.stereotype.Service;
- import org.springframework.transaction.annotation.Transactional;
+import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.nbb.spider.dao.TaskLogDao;
+import com.nbb.spider.entity.Item;
+import com.nbb.spider.entity.TaskLog;
+import com.nbb.spider.manager.exporter.impl.BaiduExporter;
+import com.nbb.spider.manager.exporter.impl.QiyiExporter;
+import com.nbb.spider.manager.exporter.impl.QiyiTop50Exporter;
+import com.nbb.spider.manager.exporter.impl.YoukuExporter;
+import com.nbb.spider.manager.webspider.impl.BaiduSpider;
+import com.nbb.spider.manager.webspider.impl.QiyiSpider;
+import com.nbb.spider.manager.webspider.impl.QiyiTop50Spider;
+import com.nbb.spider.manager.webspider.impl.YoukuSpider;
  
  @Service("spiderTask")
  public class SpiderTaskImpl
@@ -71,8 +74,8 @@
      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
      String yyyyMMdd = sdf.format(new Date());
  
-     sb.append(this.destination).append("spided").append(".").append(yyyyMMdd).append(".").append(code)
-       .append(".").append("xls");
+     sb.append(this.destination).append(KEY).append(".").append(yyyyMMdd).append(".").append(code)
+       .append(".").append(EXTENSION);
      return sb.toString();
    }
  
@@ -94,38 +97,38 @@
    protected void qiyi(Workbook wb) throws IOException {
      QiyiExporter export = new QiyiExporter();
      QiyiSpider spider = new QiyiSpider();
-     List oldQiyiRank1 = spider.extract();
+     List<? extends Item> oldQiyiRank1 = spider.extract();
      QiyiTop50Spider t50Spider = new QiyiTop50Spider();
      t50Spider.setTargetUrl("http://top.iqiyi.com/top50_1.html");
-     List qiyiMovie = t50Spider.extract();
+     List<? extends Item> qiyiMovie = t50Spider.extract();
      QiyiTop50Exporter t50Export = new QiyiTop50Exporter();
      t50Export.export(wb, qiyiMovie, "qiyiMoive");
      t50Spider.setTargetUrl("http://top.iqiyi.com/top50_2.html");
-     List qiyiTV = t50Spider.extract();
+     List<? extends Item> qiyiTV = t50Spider.extract();
      t50Export.export(wb, qiyiTV, "qiyiTV");
-     List oldQiyiRank = oldQiyiRank1;
+     List<? extends Item> oldQiyiRank = oldQiyiRank1;
      export.export(wb, oldQiyiRank, "oldQiyis");
    }
  
    protected void baidu(Workbook wb) throws IOException {
      BaiduSpider spider = new BaiduSpider();
      spider.setTargetUrl("http://top.baidu.com/buzz.php?p=movie");
-     List movieItems = spider.extract();
+     List<? extends Item>  movieItems = spider.extract();
      BaiduExporter export = new BaiduExporter();
      export.export(wb, movieItems, "baiduMovie");
      spider.setTargetUrl("http://top.baidu.com/buzz.php?p=tv");
-     List tvItems = spider.extract();
+     List<? extends Item>  tvItems = spider.extract();
      export.export(wb, tvItems, "baiduTV");
    }
  
    protected void youku(Workbook wb) throws IOException {
      YoukuSpider spider = new YoukuSpider();
      spider.setTargetUrl("http://index.youku.com/protop/2");
-     List movieItems = spider.extract();
+     List<? extends Item>  movieItems = spider.extract();
      YoukuExporter export = new YoukuExporter();
      export.export(wb, movieItems, "youkuMovie");
      spider.setTargetUrl("http://index.youku.com/protop/0");
-     List tvItems = spider.extract();
+     List<? extends Item> tvItems = spider.extract();
      export.export(wb, tvItems, "youkuTV");
    }
  

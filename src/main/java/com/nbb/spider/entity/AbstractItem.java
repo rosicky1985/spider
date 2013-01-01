@@ -16,7 +16,7 @@
      StringBuffer sb = new StringBuffer();
      boolean first = true;
      if ((list != null) && (list.size() != 0)) {
-       Iterator itr = list.iterator();
+       Iterator<? extends Object> itr = list.iterator();
        while (itr.hasNext()) {
          String key = itr.next().toString();
          if (first) {
