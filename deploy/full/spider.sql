@@ -6,3 +6,5 @@ create table `task`(
 	`destination` varchar(128) NOT NULL comment '',
 	primary key(`id`)
 )ENGINE=InnoDb DEFAULT CHARSET=utf8;
+
+GRANT ALL PRIVILEGES ON `spider`.* TO 'bestv'@'localhost' identified by 'bestvwin';
