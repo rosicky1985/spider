@@ -33,7 +33,8 @@ public abstract class AbstractSpider {
 				}
 			}
 			Item rank = parseOneline(tr);
-			ranks.add(rank);
+			if (rank != null)
+				ranks.add(rank);
 		}
 		return ranks;
 	}

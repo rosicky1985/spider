@@ -14,11 +14,10 @@
  public class QiyiTop50Exporter extends AbstractExporter
    implements Exporter
  {
-   public void export(Workbook wb, List<? extends Item> items, String sheetName)
-     throws IOException
-   {
-     exportItemsToSheet(items, sheetName, wb);
-   }
+	public void export(Workbook wb, List<? extends Item> items, String sheetName)
+			throws IOException {
+		exportItemsToSheet(items, sheetName, wb);
+	}
  
    protected void createHeaderExtra(Row row, CellStyle style)
    {
