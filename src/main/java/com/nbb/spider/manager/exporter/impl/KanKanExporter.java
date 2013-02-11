@@ -26,10 +26,10 @@ public class KanKanExporter extends AbstractExporter {
 		cell = row.createCell(3);
 		cell.setCellStyle(style);
 		cell.setCellValue("MainActor");
-		cell = row.createCell(3);
+		cell = row.createCell(4);
 		cell.setCellStyle(style);
 		cell.setCellValue("Category");
-		cell = row.createCell(4);
+		cell = row.createCell(5);
 		cell.setCellStyle(style);
 		cell.setCellValue("index");
 	}
