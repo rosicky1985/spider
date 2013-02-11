@@ -1,6 +1,7 @@
 package com.nbb.spider.manager.task;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -51,21 +52,26 @@ public class SpiderTaskImpl implements SpiderTask {
 	public void run() throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		logger.info("spider task starting... @ " + sdf.format(new Date()));
+		String realPath = getDestinationFullPathWithEncoding();
+		String webRootPath = getWebRootPath();
+		String fullPath = webRootPath + "resources/" + realPath;
+		runAndSaveToWorkbook(fullPath);
+		TaskLog log = new TaskLog();
+		log.setCreated(new Date());
+		log.setDestination(realPath);
+		this.taskLogDao.save(log);
+		logger.info("spider task ended @ " + sdf.format(new Date()));
+	}
+
+	public void runAndSaveToWorkbook(String fullPath) throws IOException,
+			FileNotFoundException {
 		QiyiExporter export = new QiyiExporter();
 		Workbook wb = export.createWorkBook();
 		qiyi(wb);
 		baidu(wb);
 		youku(wb);
 		kankan(wb);
-		String realPath = getDestinationFullPathWithEncoding();
-		String webRootPath = getWebRootPath();
-		String fullPath = webRootPath + "resources/" + realPath;
-		export.saveWorkBook(wb, fullPath);
-		TaskLog log = new TaskLog();
-		log.setCreated(new Date());
-		log.setDestination(realPath);
-		this.taskLogDao.save(log);
-		logger.info("spider task ended @ " + sdf.format(new Date()));
+		export.saveWorkBook(wb, fullPath + "/" + getDestinationFullPathWithEncoding());
 	}
 
 	protected String getDestinationFullPathWithEncoding() {
@@ -146,8 +152,8 @@ public class SpiderTaskImpl implements SpiderTask {
 	}
 
 	public static void main(String[] args) throws IOException {
-		SpiderTask spiderTask = new SpiderTaskImpl();
-		spiderTask.run();
+		SpiderTaskImpl spiderTask = new SpiderTaskImpl();
+		spiderTask.runAndSaveToWorkbook(args[0]);
 	}
 
 	public String getDestination() {
