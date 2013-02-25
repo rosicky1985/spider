@@ -19,7 +19,7 @@ public class TaskLogDaoImpl extends AbstractDao<TaskLog> implements TaskLogDao {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<TaskLog> getAllTasks() {
-		return getSession().createQuery("from TaskLog order by created desc")
+		return getSession().createQuery("from TaskLog order by created desc limit 50")
 				.list();
 	}
 }

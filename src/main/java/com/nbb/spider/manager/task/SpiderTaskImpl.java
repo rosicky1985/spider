@@ -71,7 +71,7 @@ public class SpiderTaskImpl implements SpiderTask {
 		baidu(wb);
 		youku(wb);
 		kankan(wb);
-		export.saveWorkBook(wb, fullPath + "/" + getDestinationFullPathWithEncoding());
+		export.saveWorkBook(wb, fullPath);
 	}
 
 	protected String getDestinationFullPathWithEncoding() {
