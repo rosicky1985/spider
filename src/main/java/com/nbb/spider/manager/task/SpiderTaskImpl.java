@@ -20,11 +20,13 @@ import com.nbb.spider.entity.Item;
 import com.nbb.spider.entity.TaskLog;
 import com.nbb.spider.manager.exporter.impl.BaiduExporter;
 import com.nbb.spider.manager.exporter.impl.KanKanExporter;
+import com.nbb.spider.manager.exporter.impl.LetvExporter;
 import com.nbb.spider.manager.exporter.impl.QiyiExporter;
 import com.nbb.spider.manager.exporter.impl.QiyiTop50Exporter;
 import com.nbb.spider.manager.exporter.impl.YoukuExporter;
 import com.nbb.spider.manager.webspider.impl.BaiduSpider;
 import com.nbb.spider.manager.webspider.impl.KanKanSpider;
+import com.nbb.spider.manager.webspider.impl.LetvSpider;
 import com.nbb.spider.manager.webspider.impl.QiyiSpider;
 import com.nbb.spider.manager.webspider.impl.QiyiTop50Spider;
 import com.nbb.spider.manager.webspider.impl.YoukuSpider;
@@ -71,6 +73,7 @@ public class SpiderTaskImpl implements SpiderTask {
 		baidu(wb);
 		youku(wb);
 		kankan(wb);
+		letv(wb);
 		export.saveWorkBook(wb, fullPath);
 	}
 
@@ -138,6 +141,27 @@ public class SpiderTaskImpl implements SpiderTask {
 		spider.setTargetUrl(BaiduSpider.BUIDU_TV);
 		List<? extends Item> tvItems = spider.extract();
 		export.export(wb, tvItems, "baiduTV");
+	}
+	
+	protected void letv(Workbook wb) throws IOException{
+		LetvSpider ls = new LetvSpider();
+		ls.movie();
+		ls.start();
+		List<? extends Item> movie_day = ls.extract();
+		LetvExporter ex = new LetvExporter();
+		ex.export(wb, movie_day, "letv-movie-day");
+		List<? extends Item> movie_week = ls.extract();
+		ex.export(wb, movie_week, "letv-movie-week");
+		List<? extends Item> movie_month = ls.extract();
+		ex.export(wb, movie_month, "letv-movie-month");
+		ls.tv();
+		ls.start();
+		List<? extends Item> tv_day = ls.extract();
+		ex.export(wb, tv_day, "letv-tv-day");
+		List<? extends Item> tv_week = ls.extract();
+		ex.export(wb, tv_week, "letv-tv-week");
+		List<? extends Item> tv_month = ls.extract();
+		ex.export(wb, tv_month, "letv-tv-month");
 	}
 
 	protected void youku(Workbook wb) throws IOException {
