@@ -26,7 +26,7 @@
 						</bean>
 					</property>
 					<!-- cron表达式 每周一上午十点半执行 -->
-					<property name="cronExpression" value="0 30 10 ? * MON">
+					<property name="cronExpression" value="0 30 10 * * ?">
 					</property>
 				</bean>
 			</list>

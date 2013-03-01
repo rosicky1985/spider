@@ -27,7 +27,7 @@ public class LetvExporter extends AbstractExporter implements Exporter{
 		cell = row.createCell(3);
 		cell.setCellStyle(style);
 		cell.setCellValue("director");
-		cell = row.createCell(3);
+		cell = row.createCell(4);
 		cell.setCellStyle(style);
 		cell.setCellValue("category");
 	}
