@@ -23,12 +23,14 @@ import com.nbb.spider.manager.exporter.impl.KanKanExporter;
 import com.nbb.spider.manager.exporter.impl.LetvExporter;
 import com.nbb.spider.manager.exporter.impl.QiyiExporter;
 import com.nbb.spider.manager.exporter.impl.QiyiTop50Exporter;
+import com.nbb.spider.manager.exporter.impl.SohuExporter;
 import com.nbb.spider.manager.exporter.impl.YoukuExporter;
 import com.nbb.spider.manager.webspider.impl.BaiduSpider;
 import com.nbb.spider.manager.webspider.impl.KanKanSpider;
 import com.nbb.spider.manager.webspider.impl.LetvSpider;
 import com.nbb.spider.manager.webspider.impl.QiyiSpider;
 import com.nbb.spider.manager.webspider.impl.QiyiTop50Spider;
+import com.nbb.spider.manager.webspider.impl.SohuSpider;
 import com.nbb.spider.manager.webspider.impl.YoukuSpider;
 
 @Service("spiderTask")
@@ -74,6 +76,7 @@ public class SpiderTaskImpl implements SpiderTask {
 		youku(wb);
 		kankan(wb);
 		letv(wb);
+		sohu(wb);
 		export.saveWorkBook(wb, fullPath);
 	}
 
@@ -110,7 +113,7 @@ public class SpiderTaskImpl implements SpiderTask {
 		KanKanSpider spider = new KanKanSpider();
 		spider.setTargetUrl(KanKanSpider.KANKAN_MOVIE);
 		List<? extends Item> list = spider.extract();
-		exporter.export(wb,list,"kankanMovie");
+		exporter.export(wb, list, "kankanMovie");
 		spider.setTargetUrl(KanKanSpider.KANKAN_TV);
 		list = spider.extract();
 		exporter.export(wb, list, "kankan_tv");
@@ -142,8 +145,8 @@ public class SpiderTaskImpl implements SpiderTask {
 		List<? extends Item> tvItems = spider.extract();
 		export.export(wb, tvItems, "baiduTV");
 	}
-	
-	protected void letv(Workbook wb) throws IOException{
+
+	protected void letv(Workbook wb) throws IOException {
 		LetvSpider ls = new LetvSpider();
 		ls.movie();
 		ls.start();
@@ -162,6 +165,27 @@ public class SpiderTaskImpl implements SpiderTask {
 		ex.export(wb, tv_week, "letv-tv-week");
 		List<? extends Item> tv_month = ls.extract();
 		ex.export(wb, tv_month, "letv-tv-month");
+	}
+
+	protected void sohu(Workbook wb) throws IOException {
+		SohuSpider sohu = new SohuSpider();
+		sohu.movie();
+		sohu.start();
+		List<? extends Item> movie_day = sohu.extract();
+		SohuExporter ex = new SohuExporter();
+		ex.export(wb, movie_day, "sohu-movie-day");
+		List<? extends Item> movie_week = sohu.extract();
+		ex.export(wb, movie_week, "sohu-movie-week");
+		List<? extends Item> movie_month = sohu.extract();
+		ex.export(wb, movie_month, "sohu-movie-month");
+		sohu.tv();
+		sohu.start();
+		List<? extends Item> tv_day = sohu.extract();
+		ex.export(wb, tv_day, "sohu-tv-day");
+		List<? extends Item> tv_week = sohu.extract();
+		ex.export(wb, tv_week, "sohu-tv-week");
+		List<? extends Item> tv_month = sohu.extract();
+		ex.export(wb, tv_month, "sohu-tv-month");
 	}
 
 	protected void youku(Workbook wb) throws IOException {
