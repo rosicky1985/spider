@@ -20,7 +20,7 @@ public abstract class AbstractRunner {
 		this.task = task;
 	}
 
-	protected List<FullItem> loopAllLine(Element ele, String lineTag,
+	public List<FullItem> loopAllLine(Element ele, String lineTag,
 			boolean skipFirst) {
 		List<FullItem> ranks = new ArrayList<FullItem>();
 		Elements trs = ele.getElementsByTag(lineTag);// 所有的行

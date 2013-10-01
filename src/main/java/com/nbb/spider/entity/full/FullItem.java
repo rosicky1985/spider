@@ -5,6 +5,12 @@ import java.util.List;
 import com.nbb.spider.entity.Item;
 import com.nbb.spider.entity.Task;
 
+/**
+ * 抓取视频网站排名的宽表
+ * 
+ * @author rosicky
+ * 
+ */
 public class FullItem implements Item {
 	private Long id;
 	private String title;
@@ -12,9 +18,10 @@ public class FullItem implements Item {
 	private Integer index;// 收视指数 日报周报和月报分别不一样，但都共用该字段
 	private List<Person> actors;
 	private Person director;
-	private String category;
+	private List<Category> categories;
 	private String keywords;
 	private DataSource dataSource;
+	private String area;
 	private Task task;
 
 	public Long getId() {
@@ -71,13 +78,6 @@ public class FullItem implements Item {
 		this.director = director;
 	}
 
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
 
 	public String getKeywords() {
 		return keywords;
@@ -103,13 +103,29 @@ public class FullItem implements Item {
 		this.task = task;
 	}
 
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
 	@Override
 	public String toString() {
 		return "FullItem [id=" + id + ", title=" + title + ", rank=" + rank
 				+ ", index=" + index + ", actors=" + actors + ", director="
-				+ director + ", category=" + category + ", keywords="
-				+ keywords + ", dataSource=" + dataSource + ", task=" + task
-				+ "]";
+				+ director + ", categories=" + categories + ", keywords="
+				+ keywords + ", dataSource=" + dataSource + ", area=" + area
+				+ ", task=" + task + "]";
 	}
 
 }
