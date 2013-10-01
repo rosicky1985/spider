@@ -1,7 +1,8 @@
 package com.nbb.spider.dao;
 
-import com.nbb.spider.entity.TaskLog;
 import java.util.List;
+
+import com.nbb.spider.entity.TaskLog;
 
 public abstract interface TaskLogDao
 {
