@@ -1,4 +1,4 @@
-package com.nbb.spider.manager.taskrunnerimpl;
+package com.nbb.spider.manager.task.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.nbb.spider.dao.CateGoryDao;
+import com.nbb.spider.dao.CategoryDao;
 import com.nbb.spider.dao.PersonDao;
 import com.nbb.spider.entity.full.Category;
 import com.nbb.spider.entity.full.Company;
@@ -16,7 +16,7 @@ import com.nbb.spider.entity.full.DataSource;
 import com.nbb.spider.entity.full.FullItem;
 import com.nbb.spider.entity.full.Person;
 import com.nbb.spider.entity.full.Type;
-import com.nbb.spider.manager.task.KanKanDailyTaskRunner;
+import com.nbb.spider.manager.task.impl.KanKanDailyTaskRunner;
 
 public class KanKanDailyTaskRunnerTest {
 	@Test
@@ -30,15 +30,15 @@ public class KanKanDailyTaskRunnerTest {
 		kankanTaskRunner.setPersonDao(new PersonDao() {
 
 			@Override
-			public Person getPerson(String name) {
+			public Person getByName(String name) {
 				return new Person(1, name);
 			}
 
 		});
-		kankanTaskRunner.setCateGoryDao(new CateGoryDao() {
+		kankanTaskRunner.setCateGoryDao(new CategoryDao() {
 
 			@Override
-			public Category getCateGory(String name) {
+			public Category getByName(String name) {
 				return new Category(1, name);
 			}
 

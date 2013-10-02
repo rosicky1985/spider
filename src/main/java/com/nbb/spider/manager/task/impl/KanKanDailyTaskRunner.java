@@ -1,22 +1,21 @@
-package com.nbb.spider.manager.task;
+package com.nbb.spider.manager.task.impl;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.nbb.spider.dao.CateGoryDao;
+import com.nbb.spider.dao.CategoryDao;
 import com.nbb.spider.dao.PersonDao;
 import com.nbb.spider.entity.Task;
 import com.nbb.spider.entity.full.Category;
 import com.nbb.spider.entity.full.DataSource;
 import com.nbb.spider.entity.full.FullItem;
 import com.nbb.spider.entity.full.Person;
-import com.nbb.spider.manager.taskrunnerimpl.AbstractRunner;
+import com.nbb.spider.manager.task.AbstractTaskRunner;
+import com.nbb.spider.manager.task.TaskRunner;
 import com.nbb.spider.util.Utils;
 
 public class KanKanDailyTaskRunner extends AbstractTaskRunner implements
@@ -24,7 +23,8 @@ public class KanKanDailyTaskRunner extends AbstractTaskRunner implements
 	@Autowired
 	private PersonDao personDao;
 	@Autowired
-	private CateGoryDao cateGoryDao;
+	private CategoryDao cateGoryDao;
+
 	@Override
 	public List<FullItem> run(DataSource dataSource, Task task) {
 		try {
@@ -59,24 +59,14 @@ public class KanKanDailyTaskRunner extends AbstractTaskRunner implements
 					kankan.setArea(amcsplit[0]);
 				if (amcsplit.length >= 2) {
 					String str_actors = amcsplit[1];
-					List<Person> actors = new ArrayList<Person>();
-					StringTokenizer tokens = new StringTokenizer(str_actors,
-							" ");
-					while (tokens.hasMoreTokens()) {
-						String name = tokens.nextToken();
-						actors.add(personDao.getPerson(name));
-					}
+					List<Person> actors = new DimensionParser<Person>()
+							.parseFromStringTokens(str_actors, " ", personDao);
 					kankan.setActors(actors);
 				}
 				if (amcsplit.length >= 3) {
 					String str_categories = amcsplit[2];
-					List<Category> categories = new ArrayList<Category>();
-					StringTokenizer tokens = new StringTokenizer(str_categories,
-							" ");
-					while (tokens.hasMoreTokens()) {
-						String name = tokens.nextToken();
-						categories.add(cateGoryDao.getCateGory(name));
-					}
+					List<Category> categories = new DimensionParser<Category>()
+							.parseFromStringTokens(str_categories, " ", cateGoryDao);
 					kankan.setCategories(categories);
 				}
 			}
@@ -94,11 +84,11 @@ public class KanKanDailyTaskRunner extends AbstractTaskRunner implements
 		this.personDao = personDao;
 	}
 
-	public CateGoryDao getCateGoryDao() {
+	public CategoryDao getCateGoryDao() {
 		return cateGoryDao;
 	}
 
-	public void setCateGoryDao(CateGoryDao cateGoryDao) {
+	public void setCateGoryDao(CategoryDao cateGoryDao) {
 		this.cateGoryDao = cateGoryDao;
 	}
 }

@@ -1,4 +1,4 @@
-package com.nbb.spider.manager.taskrunnerimpl;
+package com.nbb.spider.manager.task.impl;
 
 import java.io.IOException;
 import java.util.List;

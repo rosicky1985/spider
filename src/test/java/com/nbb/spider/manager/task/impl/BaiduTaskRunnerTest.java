@@ -1,4 +1,4 @@
-package com.nbb.spider.manager.taskrunnerimpl;
+package com.nbb.spider.manager.task.impl;
 
 import static org.junit.Assert.*;
 
@@ -11,6 +11,7 @@ import com.nbb.spider.entity.full.Company;
 import com.nbb.spider.entity.full.DataSource;
 import com.nbb.spider.entity.full.FullItem;
 import com.nbb.spider.entity.full.Type;
+import com.nbb.spider.manager.task.impl.BaiduDailyTaskRunner;
 
 public class BaiduTaskRunnerTest {
 	@Test

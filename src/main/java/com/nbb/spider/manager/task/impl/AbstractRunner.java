@@ -1,4 +1,4 @@
-package com.nbb.spider.manager.taskrunnerimpl;
+package com.nbb.spider.manager.task.impl;
 
 import java.util.ArrayList;
 import java.util.Iterator;

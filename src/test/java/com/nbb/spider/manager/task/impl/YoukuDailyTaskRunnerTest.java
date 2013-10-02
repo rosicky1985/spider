@@ -1,4 +1,4 @@
-package com.nbb.spider.manager.taskrunnerimpl;
+package com.nbb.spider.manager.task.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,6 +14,7 @@ import com.nbb.spider.entity.full.DataSource;
 import com.nbb.spider.entity.full.FullItem;
 import com.nbb.spider.entity.full.Person;
 import com.nbb.spider.entity.full.Type;
+import com.nbb.spider.manager.task.impl.YoukuDailyTaskRunner;
 
 public class YoukuDailyTaskRunnerTest {
 	@Test
@@ -27,7 +28,7 @@ public class YoukuDailyTaskRunnerTest {
 		youkuTaskRunner.setPersonDao(new PersonDao() {
 
 			@Override
-			public Person getPerson(String name) {
+			public Person getByName(String name) {
 				return new Person(1, name);
 			}
 

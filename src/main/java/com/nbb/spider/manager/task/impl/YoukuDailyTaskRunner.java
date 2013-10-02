@@ -1,4 +1,4 @@
-package com.nbb.spider.manager.taskrunnerimpl;
+package com.nbb.spider.manager.task.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class YoukuDailyTaskRunner extends AbstractTaskRunner implements
 					.getElementsByTag("a").iterator();
 			while (itr.hasNext()) {
 				String name = ((Element) itr.next()).text();
-				actors.add(personDao.getPerson(name));
+				actors.add(personDao.getByName(name));
 			}
 			item.setActors(actors);
 			return item;
