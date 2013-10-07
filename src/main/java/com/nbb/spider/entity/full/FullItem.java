@@ -2,6 +2,18 @@ package com.nbb.spider.entity.full;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+
 import com.nbb.spider.entity.Item;
 import com.nbb.spider.entity.Task;
 
@@ -11,17 +23,39 @@ import com.nbb.spider.entity.Task;
  * @author rosicky
  * 
  */
+@Entity
+@Table(name = "item")
 public class FullItem implements Item {
+	@Id
+	@GeneratedValue
+	@Column
 	private Long id;
+	@Column
 	private String title;
+	@Column
 	private Integer rank;
+	@Column(name = "[index]")
 	private Integer index;// 收视指数 日报周报和月报分别不一样，但都共用该字段
+	@OneToMany
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	@JoinTable(name = "item_actors", joinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "actor_id", referencedColumnName = "id") })
 	private List<Person> actors;
+	@ManyToOne
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "director_id")
 	private Person director;
+	@OneToMany
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	@JoinTable(name = "item_categories", joinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "category_id", referencedColumnName = "id") })
 	private List<Category> categories;
-	private String keywords;
+	@ManyToOne
+	@JoinColumn(name = "data_source_id")
 	private DataSource dataSource;
+	@Column
 	private String area;
+	@ManyToOne
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "task_id")
 	private Task task;
 
 	public Long getId() {
@@ -78,15 +112,6 @@ public class FullItem implements Item {
 		this.director = director;
 	}
 
-
-	public String getKeywords() {
-		return keywords;
-	}
-
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
-	}
-
 	public DataSource getDataSource() {
 		return dataSource;
 	}
@@ -123,9 +148,8 @@ public class FullItem implements Item {
 	public String toString() {
 		return "FullItem [id=" + id + ", title=" + title + ", rank=" + rank
 				+ ", index=" + index + ", actors=" + actors + ", director="
-				+ director + ", categories=" + categories + ", keywords="
-				+ keywords + ", dataSource=" + dataSource + ", area=" + area
-				+ ", task=" + task + "]";
+				+ director + ", categories=" + categories + ", dataSource="
+				+ dataSource + ", area=" + area + ", task=" + task + "]";
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.stereotype.Service;
 
 import com.nbb.spider.entity.Task;
 import com.nbb.spider.entity.full.DataSource;
@@ -19,6 +20,7 @@ import com.nbb.spider.util.Utils;
  * @author rosicky
  * 
  */
+@Service
 public class BaiduDailyTaskRunner extends AbstractTaskRunner implements
 		TaskRunner {
 	@Override
@@ -46,7 +48,8 @@ public class BaiduDailyTaskRunner extends AbstractTaskRunner implements
 			FullItem item = getFullItem();
 			item.setRank(Utils.atoi(ele.getElementsByClass("first").first()
 					.text()));
-			item.setTitle(ele.getElementsByClass("keyword").first().text());
+			item.setTitle(ele.getElementsByClass("keyword").first()
+					.getElementsByClass("list-title").first().text());
 			item.setIndex(Utils.atoi(ele.getElementsByClass("last").first()
 					.getElementsByTag("span").first().text()));
 			return item;

@@ -1,5 +1,8 @@
 package com.nbb.spider.manager.task.impl.qiyi;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class QiyiDailyTaskRunner extends QiyiTaskRunner {
 
 	@Override

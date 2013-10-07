@@ -7,6 +7,7 @@ import java.util.List;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nbb.spider.dao.CategoryDao;
 import com.nbb.spider.dao.PersonDao;
@@ -28,7 +29,9 @@ import com.nbb.spider.util.Utils;
  */
 public abstract class LetvTaskRunner extends AbstractTaskRunner implements
 		TaskRunner {
+	@Autowired
 	private PersonDao personDao;
+	@Autowired
 	private CategoryDao categoryDao;
 
 	abstract int getTabIndex();

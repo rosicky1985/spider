@@ -8,6 +8,7 @@ import java.util.List;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.nbb.spider.dao.PersonDao;
 import com.nbb.spider.entity.Task;
@@ -24,6 +25,8 @@ import com.nbb.spider.util.Utils;
  * @author rosicky
  * 
  */
+
+@Service
 public class YoukuDailyTaskRunner extends AbstractTaskRunner implements
 		TaskRunner {
 	@Autowired

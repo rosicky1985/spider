@@ -6,6 +6,7 @@ import java.util.List;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.nbb.spider.dao.CategoryDao;
 import com.nbb.spider.dao.PersonDao;
@@ -17,7 +18,7 @@ import com.nbb.spider.entity.full.Person;
 import com.nbb.spider.manager.task.AbstractTaskRunner;
 import com.nbb.spider.manager.task.TaskRunner;
 import com.nbb.spider.util.Utils;
-
+@Service
 public class KanKanDailyTaskRunner extends AbstractTaskRunner implements
 		TaskRunner {
 	@Autowired

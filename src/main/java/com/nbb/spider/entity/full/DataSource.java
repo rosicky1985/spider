@@ -1,11 +1,33 @@
 package com.nbb.spider.entity.full;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "data_source")
 public class DataSource {
+	@Id
+	@GeneratedValue
+	@Column
 	private Integer id;
+	@Column
 	private String name;
+	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)  
+    @JoinColumn(name="company_id") 
 	private Company company;
+	@Column
 	private String url;
+	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)  
+    @JoinColumn(name="type_id")
 	private Type type;
+	@Column
+	private String bean;
 
 	public DataSource() {
 		super();
@@ -66,4 +88,13 @@ public class DataSource {
 		return "DataSource [id=" + id + ", name=" + name + ", company="
 				+ company + ", url=" + url + ", type=" + type + "]";
 	}
+
+	public String getBean() {
+		return bean;
+	}
+
+	public void setBean(String bean) {
+		this.bean = bean;
+	}
+
 }

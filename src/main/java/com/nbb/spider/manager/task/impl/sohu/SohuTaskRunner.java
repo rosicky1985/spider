@@ -6,6 +6,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.nbb.spider.dao.CategoryDao;
 import com.nbb.spider.dao.PersonDao;
@@ -19,6 +21,7 @@ import com.nbb.spider.manager.task.TaskRunner;
 import com.nbb.spider.manager.task.impl.DimensionParser;
 import com.nbb.spider.util.Utils;
 
+@Service
 public class SohuTaskRunner extends AbstractTaskRunner implements TaskRunner {
 	public static String[] MOVIES = {
 			"http://tv.sohu.com/frag/vrs_inc/phb_mv_day_50.js",
@@ -28,15 +31,16 @@ public class SohuTaskRunner extends AbstractTaskRunner implements TaskRunner {
 			"http://tv.sohu.com/frag/vrs_inc/phb_tv_day_50.js",
 			"http://tv.sohu.com/frag/vrs_inc/phb_tv_week_50.js",
 			"http://tv.sohu.com/frag/vrs_inc/phb_tv_month_50.js" };
-
+	@Autowired
 	private PersonDao personDao;
+	@Autowired
 	private CategoryDao categoryDao;
 
 	@Override
 	public List<FullItem> run(DataSource dataSource, Task task) {
 		try {
 			List<FullItem> ret1 = new ArrayList<FullItem>();
-			String line = Utils.httpGet(dataSource.getUrl(),"GBK");
+			String line = Utils.httpGet(dataSource.getUrl(), "GBK");
 			int indexOfStart = line.indexOf('{');
 			String jsoncontent = line.substring(indexOfStart);
 			JSONObject root = new JSONObject(jsoncontent);
