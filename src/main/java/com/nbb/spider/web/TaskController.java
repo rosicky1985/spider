@@ -13,7 +13,7 @@ public class TaskController {
 	@Autowired
 	private TaskRunnerManager taskRunnerManager;
 
-	@RequestMapping({ "/task/run.do" })
+	@RequestMapping({ "/api/task/run.do" })
 	public String run() throws IOException {
 		this.taskRunnerManager.rullAll();
 		return "redirect:/task/list.do";

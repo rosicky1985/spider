@@ -16,6 +16,7 @@ import org.hibernate.annotations.Cascade;
 
 import com.nbb.spider.entity.Item;
 import com.nbb.spider.entity.Task;
+import com.nbb.spider.util.Utils;
 
 /**
  * 抓取视频网站排名的宽表
@@ -152,4 +153,52 @@ public class FullItem implements Item {
 				+ dataSource + ", area=" + area + ", task=" + task + "]";
 	}
 
+	public String toCsv() {
+		String delimeter = ",";
+		String csv = "";
+		csv += (id + delimeter);
+		csv += (title + delimeter);
+		csv += (rank + delimeter);
+		csv += (index + delimeter);
+		csv += (actors == null ? "" : (Utils.mkString(actors.iterator(), "|",
+				new Utils.MkStringPart() {
+					@Override
+					public String getString(Object obj) {
+						return ((Person) obj).getName();
+					}
+				}))) + delimeter;
+		csv += (director == null ? "" : director.getName()) + delimeter;
+		csv += ((categories == null ? "" : (Utils.mkString(
+				categories.iterator(), "|", new Utils.MkStringPart() {
+					@Override
+					public String getString(Object obj) {
+						return ((Category) obj).getName();
+					}
+				}))) + delimeter);
+		csv += (dataSource.getName() + delimeter);
+		csv += (dataSource.getCompany().getName() + delimeter);
+		csv += (dataSource.getType().getName() + delimeter);
+		csv += ((area == null ? "" : area) + delimeter);
+		csv += (Utils.formatTime(task.getCreated()) + delimeter);
+		csv += (Utils.formatTime(task.getTarget()));
+		return csv;
+	}
+
+	public static String csvHeader() {
+		String csv = "";
+		csv += "id,";
+		csv += "title,";
+		csv += "rank,";
+		csv += "index,";
+		csv += "actors,";
+		csv += "director,";
+		csv += "categroies,";
+		csv += "datasource,";
+		csv += "company,";
+		csv += "type,";
+		csv += "area,";
+		csv += "runtime,";
+		csv += "targettime";
+		return csv;
+	}
 }
