@@ -66,6 +66,29 @@ public class TaskRunnerManager {
 		}
 	}
 
+	@Transactional
+	public void runDaily() {
+		runAType(Type.DAILY);
+	}
+
+	private void runAType(Type type) {
+		List<DataSource> ds = dataSourceDao.find(type);
+		Date now = new Date();
+		Task task = TaskFactory.createTask(type, now);
+		for (DataSource d : ds)
+			runOneDs(task, d);
+	}
+
+	@Transactional
+	public void runWeekly() {
+		runAType(Type.WEEKILY);
+	}
+
+	@Transactional
+	public void runMonthly() {
+		runAType(Type.MONTHLY);
+	}
+
 	private void runOneDs(Task task, DataSource d) {
 		Object bean = ctx.getBean(d.getBean());
 		if (bean != null && bean instanceof TaskRunner) {

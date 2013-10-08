@@ -175,7 +175,7 @@ public class FullItem implements Item {
 						return ((Category) obj).getName();
 					}
 				}))) + delimeter);
-		csv += (dataSource.getName() + delimeter);
+		csv += (dataSource.getContenttype() + delimeter);
 		csv += (dataSource.getCompany().getName() + delimeter);
 		csv += (dataSource.getType().getName() + delimeter);
 		csv += ((area == null ? "" : area) + delimeter);
@@ -193,7 +193,7 @@ public class FullItem implements Item {
 		csv += "actors,";
 		csv += "director,";
 		csv += "categroies,";
-		csv += "datasource,";
+		csv += "contenttype,";
 		csv += "company,";
 		csv += "type,";
 		csv += "area,";

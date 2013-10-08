@@ -18,6 +18,8 @@ public class DataSource {
 	private Integer id;
 	@Column
 	private String name;
+	@Column
+	private String contenttype;
 	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH }, optional = true)  
     @JoinColumn(name="company_id") 
 	private Company company;
@@ -95,6 +97,14 @@ public class DataSource {
 
 	public void setBean(String bean) {
 		this.bean = bean;
+	}
+
+	public String getContenttype() {
+		return contenttype;
+	}
+
+	public void setContenttype(String contenttype) {
+		this.contenttype = contenttype;
 	}
 
 }
