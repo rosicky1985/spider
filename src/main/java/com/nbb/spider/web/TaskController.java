@@ -9,31 +9,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nbb.spider.manager.webspider.TaskRunnerManager;
 
 @Controller
+@RequestMapping("/task")
 public class TaskController {
 	@Autowired
 	private TaskRunnerManager taskRunnerManager;
 
-	@RequestMapping({ "/task/run/all" })
+	@RequestMapping({ "/run/all" })
 	public String run() throws IOException {
 		this.taskRunnerManager.rullAll();
-		return "redirect:/task/list.do";
+		return "redirect:/api/";
 	}
 
-	@RequestMapping({ "/task/run/daily" })
+	@RequestMapping({ "/run/daily" })
 	public String daily() throws IOException {
 		this.taskRunnerManager.runDaily();
-		return "redirect:/task/list.do";
+		return "redirect:/api/";
 	}
 
-	@RequestMapping({ "/task/run/weekly" })
+	@RequestMapping({ "/run/weekly" })
 	public String weekly() throws IOException {
 		this.taskRunnerManager.runWeekly();
-		return "redirect:/task/list.do";
+		return "redirect:/api/";
 	}
 
-	@RequestMapping({ "/task/run/monthly" })
+	@RequestMapping({ "/run/monthly" })
 	public String monthly() throws IOException {
 		this.taskRunnerManager.runMonthly();
-		return "redirect:/task/list.do";
+		return "redirect:/api/";
+	}
+
+	@RequestMapping({ "/run/today" })
+	public String today() throws IOException {
+		this.taskRunnerManager.runToday();
+		return "redirect:/api/";
 	}
 }

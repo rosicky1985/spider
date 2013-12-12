@@ -53,6 +53,7 @@ YUI().use('node', "json-stringify", "json-parse", "io", function(Y) {
 		var dateTitleDiv = Y.Node.create('<div>');
 		var month = parseDate(day).getMonth() + 1;
 		dateTitleDiv.setHTML(month + "月" + parseDate(day).getDate() + "日");
+		dateTitleDiv.addClass('day');
 		dayDiv.append(dateTitleDiv);
 		for ( var i = 0; i < tasks.length; i++) {
 			var task = tasks[i];
@@ -61,8 +62,8 @@ YUI().use('node', "json-stringify", "json-parse", "io", function(Y) {
 			var createdSpan = Y.Node.create('<span>');
 			taskDiv.append(createdSpan);
 			createdSpan.setHTML(task.created);
-			var typeUl = Y.Node.created('<ul>');
-			dayDiv.append(typeUL);
+			var typeUl = Y.Node.create('<ul>');
+			dayDiv.append(typeUl);
 			for ( var j = 0; j < task.types.length; j++) {
 				var type = task.types[j];
 				var typeli = Y.Node.create('<li>');

@@ -22,6 +22,8 @@ import com.nbb.spider.entity.full.FullItem;
 import com.nbb.spider.entity.full.Type;
 import com.nbb.spider.manager.task.TaskFactory;
 import com.nbb.spider.manager.task.TaskRunner;
+import com.nbb.spider.manager.webspider.runtoday.Runner;
+import com.nbb.spider.manager.webspider.runtoday.TodayRunner;
 
 /**
  * 抓取数据的任务运行管理器
@@ -99,5 +101,28 @@ public class TaskRunnerManager {
 				fullItemDao.save(fi);
 			}
 		}
+	}
+
+	@Transactional
+	public void runToday() {
+		final TaskRunnerManager outer = this;
+		Runner run = new Runner() {
+			@Override
+			public void runDaily() {
+				outer.runDaily();
+			}
+
+			@Override
+			public void runWeekly() {
+				outer.runWeekly();
+			}
+
+			@Override
+			public void runMonthly() {
+				outer.runMonthly();
+			}
+		};
+		TodayRunner runner = new TodayRunner();
+		runner.run(run, new Date());
 	}
 }
