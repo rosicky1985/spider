@@ -27,6 +27,7 @@ import com.nbb.spider.util.Utils;
 @Entity
 @Table(name = "item")
 public class FullItem implements Item {
+	private final static String DELIMETER = "#";
 	@Id
 	@GeneratedValue
 	@Column
@@ -154,50 +155,49 @@ public class FullItem implements Item {
 	}
 
 	public String toCsv() {
-		String delimeter = ",";
 		String csv = "";
-		csv += (id + delimeter);
-		csv += (title + delimeter);
-		csv += (rank + delimeter);
-		csv += (index + delimeter);
+		csv += (id + DELIMETER);
+		csv += (title + DELIMETER);
+		csv += (rank + DELIMETER);
+		csv += (index + DELIMETER);
 		csv += (actors == null ? "" : (Utils.mkString(actors.iterator(), "|",
 				new Utils.MkStringPart() {
 					@Override
 					public String getString(Object obj) {
 						return ((Person) obj).getName();
 					}
-				}))) + delimeter;
-		csv += (director == null ? "" : director.getName()) + delimeter;
+				}))) + DELIMETER;
+		csv += (director == null ? "" : director.getName()) + DELIMETER;
 		csv += ((categories == null ? "" : (Utils.mkString(
 				categories.iterator(), "|", new Utils.MkStringPart() {
 					@Override
 					public String getString(Object obj) {
 						return ((Category) obj).getName();
 					}
-				}))) + delimeter);
-		csv += (dataSource.getContenttype() + delimeter);
-		csv += (dataSource.getCompany().getName() + delimeter);
-		csv += (dataSource.getType().getName() + delimeter);
-		csv += ((area == null ? "" : area) + delimeter);
-		csv += (Utils.formatTime(task.getCreated()) + delimeter);
+				}))) + DELIMETER);
+		csv += (dataSource.getContenttype() + DELIMETER);
+		csv += (dataSource.getCompany().getName() + DELIMETER);
+		csv += (dataSource.getType().getName() + DELIMETER);
+		csv += ((area == null ? "" : area) + DELIMETER);
+		csv += (Utils.formatTime(task.getCreated()) + DELIMETER);
 		csv += (Utils.formatTime(task.getTarget()));
 		return csv;
 	}
 
 	public static String csvHeader() {
 		String csv = "";
-		csv += "id,";
-		csv += "title,";
-		csv += "rank,";
-		csv += "index,";
-		csv += "actors,";
-		csv += "director,";
-		csv += "categroies,";
-		csv += "contenttype,";
-		csv += "company,";
-		csv += "type,";
-		csv += "area,";
-		csv += "runtime,";
+		csv += "id" + DELIMETER;
+		csv += "title" + DELIMETER;
+		csv += "rank" + DELIMETER;
+		csv += "index" + DELIMETER;
+		csv += "actors" + DELIMETER;
+		csv += "director" + DELIMETER;
+		csv += "categroies" + DELIMETER;
+		csv += "contenttype" + DELIMETER;
+		csv += "company" + DELIMETER;
+		csv += "type" + DELIMETER;
+		csv += "area" + DELIMETER;
+		csv += "runtime" + DELIMETER;
 		csv += "targettime";
 		return csv;
 	}
