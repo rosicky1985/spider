@@ -39,7 +39,7 @@ public class ItemController {
 		try {
 			os = response.getOutputStream();
 			os.write(new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF });
-			out = response.getWriter();
+			out = new PrintWriter(os);
 			out.println(FullItem.csvHeader());
 			FullItemQuery q = itemDao.createQuey();
 			q.start(start);
