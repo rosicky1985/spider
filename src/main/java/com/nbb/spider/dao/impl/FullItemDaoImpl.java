@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -53,7 +54,7 @@ public class FullItemDaoImpl extends AbstractDao<FullItem> implements
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public List<FullItem> list() {
+			public Iterator<FullItem> list() {
 				SimpleDateFormat sdf = new SimpleDateFormat(
 						"yyyy-MM-dd HH:mm:ss");
 				String hql = "from FullItem";
@@ -88,7 +89,7 @@ public class FullItemDaoImpl extends AbstractDao<FullItem> implements
 						hql += w.condition + w.op + "'" + w.value + "'";
 					}
 				}
-				return getSession().createQuery(hql).list();
+				return getSession().createQuery(hql).iterate();
 			}
 
 		}

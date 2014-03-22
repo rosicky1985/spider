@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import java.util.Iterator;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,10 +44,9 @@ public class ItemController {
 			FullItemQuery q = itemDao.createQuey();
 			q.start(start);
 			q.end(end);
-			List<FullItem> list = q.list();
-			for (FullItem fi : list) {
-				out.println(fi.toCsv());
-			}
+			Iterator<FullItem> itr = q.list();
+			while (itr.hasNext())
+				out.println(itr.next().toCsv());
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

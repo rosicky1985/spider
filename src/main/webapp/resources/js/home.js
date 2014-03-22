@@ -74,10 +74,10 @@ YUI().use('node', "json-stringify", "json-parse", "io", function(Y) {
 		td.append(dayDiv);
 	};
 	var init = function() {
-		var now = new Date();
-		currentDay = now;
-		calendarWidget.init(currentDay, Y, rendarDay, "tbody");
-		widgets.init();
+		//var now = new Date();
+		//currentDay = now;
+		//calendarWidget.init(currentDay, Y, rendarDay, "tbody");
+		//widgets.init();
 	};
 
 	Y.on("domready", init);

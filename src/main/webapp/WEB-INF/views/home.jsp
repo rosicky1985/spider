@@ -10,18 +10,41 @@
 <script src="${ctx }/resources/js/home.js"></script>
 <style type="text/css" src="${ctx }/resources/css/calendar.css"></style>
 <style type="text/css">
-	.day{
-		align:center;
-		background-color:#EFDEAD;
-	}
+.day {
+	align: center;
+	background-color: #EFDEAD;
+}
 </style>
 </head>
 <body>
 	<h1>Welcome spider 2.0</h1>
 	<div>
-		<ul>
-			<li><a href="item/export/">导出所有数据</a></li>
-		</ul>
+		<form method="get" action="item/export" name="export">
+		start<input name="start"/>
+		end<input name="end"/>
+		<input type="button" value="导出数据" onclick="validation()"></input>
+		<script>
+			function validation(){
+				var exp = document.export;
+				var url = exp.action;
+				var param = [];
+				if(exp.start.value.trim() != "") param.push({p:'start',v:exp.start.value});
+				if(exp.end.value.trim() != "") param.push({p:'end',v:exp.end.value});
+				var first = true;
+				for(var i = 0 ; i < param.length;i ++){
+					var p = param[i];
+					if(first){
+						url += '?';
+						first = false;
+					}else{
+						url += '&';
+					}
+					url += (p.p + '=' + p.v);
+				}
+				window.location.href=url;
+			} 
+		</script>
+		</form>
 	</div>
 	<div>
 		<h3>立即运行</h3>
@@ -33,6 +56,7 @@
 			<li><a href="task/run/today/">今天</a></li>
 		</ul>
 	</div>
+	<!-- 
 	<div>
 		<input type="button" id="pre" value="上月"></input> <input type="button"
 			id="next" value="下月"></input>
@@ -51,6 +75,7 @@
 			<tbody id="tbody"></tbody>
 		</table>
 	</div>
+	 -->
 </body>
 </html>
 
