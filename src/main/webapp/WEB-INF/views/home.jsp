@@ -14,15 +14,33 @@
 	align: center;
 	background-color: #EFDEAD;
 }
+body{
+	font-size:12px;
+	font-family: 'Lucida Grande', Tahoma, Verdana, arial, sans-serif, hei;
+}
+ul li{
+	display:inline;
+}
+fieldset{
+	display:inline;
+	float:left;
+}
+fieldset legend{
+	color:rgb(11, 85, 196);
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
 	<h1>Welcome spider 2.0</h1>
 	<div>
 		<form method="get" action="item/export" name="export">
-		start<input name="start"/>
-		end<input name="end"/>
-		<input type="button" value="导出数据" onclick="validation()"></input>
+		<fieldset>
+		<legend>按目标时间导出</legend>
+		<div>时间段开始<input name="start" size=12/>(yyyyMMdd,不填写代表不care)</div>
+		<div>时间段结束<input name="end" size=12/>(yyyyMMdd,不填写代表不care)<input type="button" value="导出数据" onclick="validation()"></div>
+		
+		</fieldset>
 		<script>
 			function validation(){
 				var exp = document.export;
@@ -46,16 +64,18 @@
 		</script>
 		</form>
 	</div>
-	<div>
-		<h3>立即运行</h3>
+	<fieldset>
+		<legend>立即运行</legend>
 		<ul>
 			<li><a href="task/run/all/">所有</a></li>
-			<li><a href="task/run/daily/">日报</a></li>
+		</ul>
+		<ul><li><a href="task/run/daily/">日报</a></li>
 			<li><a href="task/run/weekly/">周报</a></li>
-			<li><a href="task/run/monthly/">月报</a></li>
+			<li><a href="task/run/monthly/">月报</a></li></ul>
+		<ul>
 			<li><a href="task/run/today/">今天</a></li>
 		</ul>
-	</div>
+	</fieldset>
 	<!-- 
 	<div>
 		<input type="button" id="pre" value="上月"></input> <input type="button"
