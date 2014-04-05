@@ -5,6 +5,10 @@
 #$pwd where the spidered file stored
 #install 
 #you should make backup destination trust source via ssh.
-pwd=/opt/apache-tomcat-6.0.32/webapps/spider/resources/
-echo "pwd is $pwd"
+pwd=/home/rosicky
+now=`date "+%Y%m%d"`
+user=rosicky
+p=love
+db=spider_junior
+mysqldump $db -u$user -p$p > $pwd/spider.bak.$now.sql
 
