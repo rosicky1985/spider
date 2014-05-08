@@ -64,6 +64,37 @@ fieldset legend{
 		</script>
 		</form>
 	</div>
+	<div>
+		<form method="get" action="item/exportbycreated" name="exportbycreated">
+		<fieldset>
+		<legend>按发生时间导出</legend>
+		<div>时间段开始<input name="start" size=12/>(yyyyMMdd,不填写代表不care)</div>
+		<div>时间段结束<input name="end" size=12/>(yyyyMMdd,不填写代表不care)<input type="button" value="导出数据" onclick="validationbycreated()"></div>
+		
+		</fieldset>
+		<script>
+			function validationbycreated(){
+				var exp = document.exportbycreated;
+				var url = exp.action;
+				var param = [];
+				if(exp.start.value.trim() != "") param.push({p:'start',v:exp.start.value});
+				if(exp.end.value.trim() != "") param.push({p:'end',v:exp.end.value});
+				var first = true;
+				for(var i = 0 ; i < param.length;i ++){
+					var p = param[i];
+					if(first){
+						url += '?';
+						first = false;
+					}else{
+						url += '&';
+					}
+					url += (p.p + '=' + p.v);
+				}
+				window.location.href=url;
+			} 
+		</script>
+		</form>
+	</div>
 	<fieldset>
 		<legend>立即运行</legend>
 		<ul>
@@ -76,26 +107,6 @@ fieldset legend{
 			<li><a href="task/run/today/">今天</a></li>
 		</ul>
 	</fieldset>
-	<!-- 
-	<div>
-		<input type="button" id="pre" value="上月"></input> <input type="button"
-			id="next" value="下月"></input>
-		<table style="border-collapse:collapse" border=1>
-			<thead>
-				<tr>
-					<th>周日</th>
-					<th>周一</th>
-					<th>周二</th>
-					<th>周三</th>
-					<th>周四</th>
-					<th>周五</th>
-					<th>周六</th>
-				</tr>
-			</thead>
-			<tbody id="tbody"></tbody>
-		</table>
-	</div>
-	 -->
 </body>
 </html>
 

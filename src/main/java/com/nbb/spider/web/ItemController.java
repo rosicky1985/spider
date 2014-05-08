@@ -60,6 +60,39 @@ public class ItemController {
 				out.close();
 		}
 	}
+	
+	@RequestMapping(value = "/exportbycreated", method = RequestMethod.GET)
+	@Transactional
+	public void exportbycreated(Date start, Date end, HttpServletResponse response) {
+		response.setContentType("application/vnd.ms-excel;charset=UTF-8");
+		response.setHeader("Content-Disposition",
+				"attachment; filename=\"spider.csv\"");
+		OutputStream os = null;
+		PrintWriter out = null;
+		try {
+			os = response.getOutputStream();
+			os.write(new byte[] { (byte) 0xEF, (byte) 0xBB, (byte) 0xBF });
+			out = new PrintWriter(os);
+			out.println(FullItem.csvHeader());
+			FullItemQuery q = itemDao.createQuey();
+			q.createdstart(start);
+			q.createdend(end);
+			Iterator<FullItem> itr = q.list();
+			while (itr.hasNext())
+				out.println(itr.next().toCsv());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (os != null)
+					os.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (out != null)
+				out.close();
+		}
+	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {

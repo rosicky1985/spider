@@ -23,6 +23,8 @@ public class FullItemDaoImpl extends AbstractDao<FullItem> implements
 		class FullItemQueryImpl implements FullItemQuery {
 			private Date start;
 			private Date end;
+			private Date createdStart;
+			private Date createdEnd;
 
 			@Override
 			public void start(Date start) {
@@ -77,6 +79,14 @@ public class FullItemDaoImpl extends AbstractDao<FullItem> implements
 				if (end != null) {
 					wheres.add(new Where("task.target", "<", sdf.format(end)));
 				}
+				if (createdStart != null) {
+					wheres.add(new Where("task.created", ">", sdf
+							.format(createdStart)));
+				}
+				if (createdEnd != null) {
+					wheres.add(new Where("task.created", "<", sdf
+							.format(createdEnd)));
+				}
 				if (wheres.size() > 0) {
 					hql += " where ";
 					boolean first = true;
@@ -90,6 +100,16 @@ public class FullItemDaoImpl extends AbstractDao<FullItem> implements
 					}
 				}
 				return getSession().createQuery(hql).iterate();
+			}
+
+			@Override
+			public void createdstart(Date start) {
+				this.createdStart = start;
+			}
+
+			@Override
+			public void createdend(Date end) {
+				this.createdEnd = end;
 			}
 
 		}

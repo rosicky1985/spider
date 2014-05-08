@@ -10,5 +10,6 @@ now=`date "+%Y%m%d"`
 user=rosicky
 p=love
 db=spider_junior
+#script started below
 mysqldump $db -u$user -p$p > $pwd/spider.bak.$now.sql
 

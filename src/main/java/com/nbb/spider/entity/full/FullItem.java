@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,24 +39,24 @@ public class FullItem implements Item {
 	private Integer rank;
 	@Column(name = "[index]")
 	private Integer index;// 收视指数 日报周报和月报分别不一样，但都共用该字段
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinTable(name = "item_actors", joinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "actor_id", referencedColumnName = "id") })
 	private List<Person> actors;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "director_id")
 	private Person director;
-	@OneToMany
+	@OneToMany(fetch=FetchType.LAZY)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinTable(name = "item_categories", joinColumns = { @JoinColumn(name = "item_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "category_id", referencedColumnName = "id") })
 	private List<Category> categories;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "data_source_id")
 	private DataSource dataSource;
 	@Column
 	private String area;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "task_id")
 	private Task task;
